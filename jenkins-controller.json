@@ -1,0 +1,26 @@
+{
+  "id": "jenkins-controller",
+  "kind": "ReplicationController",
+  "apiVersion": "v1beta1",
+  "desiredState": {
+    "replicas": 1,
+    "replicaSelector": {"name": "jenkins"},
+    "podTemplate": {
+      "desiredState": {
+        "manifest": {
+          "version": "v1beta1",
+          "id": "jenkins-controller",
+          "containers": [{
+            "name": "jenkins-slave",
+            "image": "jenkins",
+            "cpu": 100,
+            "memory": 50000000,
+            "ports": [{"hostPort": 8080, "containerPort": 8080}]
+          }]
+        }
+      },
+      "labels": { "name": "jenkins" }
+    }
+  },
+  "labels": {"name": "jenkins"}
+}
